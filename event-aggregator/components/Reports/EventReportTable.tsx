@@ -10,11 +10,11 @@ export default function EventReportTable({
   events,
 }: Props) {
   return (
-    <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
 
-      <div className="p-8 border-b">
+      <div className="px-5 py-4 border-b border-slate-200">
 
-        <h2 className="text-3xl font-bold text-blue-700">
+        <h2 className="text-sm font-bold text-slate-700">
           Event Performance
         </h2>
 
@@ -24,23 +24,23 @@ export default function EventReportTable({
 
         <table className="w-full">
 
-          <thead className="bg-blue-700 text-white">
+          <thead className="bg-slate-700 text-white">
 
             <tr>
 
-              <th className="p-4 text-left">
+              <th className="px-4 py-2.5 text-left text-xs font-bold uppercase tracking-wider">
                 Rank
               </th>
 
-              <th className="p-4 text-left">
+              <th className="px-4 py-2.5 text-left text-xs font-bold uppercase tracking-wider">
                 Event
               </th>
 
-              <th className="p-4 text-left">
+              <th className="px-4 py-2.5 text-left text-xs font-bold uppercase tracking-wider">
                 Category
               </th>
 
-              <th className="p-4 text-center">
+              <th className="px-4 py-2.5 text-center text-xs font-bold uppercase tracking-wider">
                 Registrations
               </th>
 
@@ -57,21 +57,21 @@ export default function EventReportTable({
                 className="border-b hover:bg-slate-50"
               >
 
-                <td className="p-4 font-bold">
+                <td className="px-4 py-2.5 text-xs font-bold text-slate-500">
                   #{index + 1}
                 </td>
 
-                <td className="p-4 font-semibold">
+                <td className="px-4 py-2.5 text-xs font-semibold text-slate-800">
                   {event.eventTitle}
                 </td>
 
-                <td className="p-4">
-                  <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
+                <td className="px-4 py-2.5">
+                  <span className="bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full text-[10px] font-bold">
                     {event.category}
                   </span>
                 </td>
 
-                <td className="p-4 text-center font-bold text-green-600">
+                <td className="px-4 py-2.5 text-center text-xs font-bold text-green-600">
                   {event.registrations}
                 </td>
 
@@ -85,7 +85,7 @@ export default function EventReportTable({
 
                 <td
                   colSpan={4}
-                  className="text-center py-10 text-gray-500"
+                  className="text-center py-8 text-xs text-slate-400"
                 >
                   No registrations found.
                 </td>

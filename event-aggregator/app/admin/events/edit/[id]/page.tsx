@@ -304,7 +304,7 @@ export default function EditEventPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="md:col-span-2 bg-blue-700 hover:bg-blue-800 text-white py-4 rounded-xl text-lg font-semibold transition"
+            className="md:col-span-2 bg-blue-700 hover:bg-blue-800 text-white py-4 rounded-xl text-lg font-semibold transition cursor-pointer"
           >
             {submitting ? "Updating Event..." : "Save & Update Event"}
           </button>

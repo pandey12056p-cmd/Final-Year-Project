@@ -81,138 +81,170 @@ export default function AddEventPage() {
           onSubmit={handleSubmit}
           className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6"
         >
-          <input
-            name="title"
-            required
-            placeholder="Event Title"
-            className="border rounded-xl px-4 py-4"
-          />
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Event Title</label>
+            <input
+              name="title"
+              required
+              placeholder="e.g. Hackathon 2026"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            />
+          </div>
 
-          <select
-            name="category"
-            required
-            className="border rounded-xl px-4 py-4"
-          >
-            <option value="">Select Category</option>
-            <option>Hackathon</option>
-            <option>Workshop</option>
-            <option>Seminar</option>
-            <option>Sports</option>
-            <option>Cultural</option>
-            <option>Placement Drive</option>
-          </select>
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Category</label>
+            <select
+              name="category"
+              required
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            >
+              <option value="">Select Category</option>
+              <option>Hackathon</option>
+              <option>Workshop</option>
+              <option>Seminar</option>
+              <option>Sports</option>
+              <option>Cultural</option>
+              <option>Placement Drive</option>
+            </select>
+          </div>
 
-          <input
-            name="organizer"
-            required
-            placeholder="Organizer Name"
-            className="border rounded-xl px-4 py-4"
-          />
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Organizer Name</label>
+            <input
+              name="organizer"
+              required
+              placeholder="e.g. Computer Science Department"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            />
+          </div>
 
-          <input
-            name="image"
-            required
-            placeholder="Image URL"
-            className="border rounded-xl px-4 py-4"
-          />
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Image URL</label>
+            <input
+              name="image"
+              required
+              placeholder="e.g. https://images.unsplash.com/photo-..."
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            />
+          </div>
 
-          <input
-            name="location"
-            required
-            placeholder="Location / Venue"
-            className="border rounded-xl px-4 py-4"
-          />
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Location / Venue</label>
+            <input
+              name="location"
+              required
+              placeholder="e.g. Seminar Hall 3"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            />
+          </div>
 
-          <select
-            name="mode"
-            required
-            className="border rounded-xl px-4 py-4"
-          >
-            <option value="">Select Mode</option>
-            <option>Offline</option>
-            <option>Online</option>
-            <option>Hybrid</option>
-          </select>
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Mode</label>
+            <select
+              name="mode"
+              required
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            >
+              <option value="">Select Mode</option>
+              <option>Offline</option>
+              <option>Online</option>
+              <option>Hybrid</option>
+            </select>
+          </div>
 
-          <div>
-            <label className="block mb-2 font-medium">
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
               Event Date & Time
             </label>
-
             <input
               name="date"
               required
               type="datetime-local"
-              className="border rounded-xl px-4 py-4 w-full"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
             />
           </div>
 
-          <div>
-            <label className="block mb-2 font-medium">
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
               Registration Deadline
             </label>
-
             <input
               name="registrationDeadline"
               required
               type="datetime-local"
-              className="border rounded-xl px-4 py-4 w-full"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
             />
           </div>
 
-          <input
-            name="maxParticipants"
-            required
-            type="number"
-            placeholder="Max Participants"
-            className="border rounded-xl px-4 py-4"
-          />
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Max Participants</label>
+            <input
+              name="maxParticipants"
+              required
+              type="number"
+              placeholder="e.g. 100"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            />
+          </div>
 
-          <input
-            name="prize"
-            required
-            placeholder="Prize / Reward"
-            className="border rounded-xl px-4 py-4"
-          />
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Prize / Reward</label>
+            <input
+              name="prize"
+              required
+              placeholder="e.g. Cash Prize of 10,000 INR"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            />
+          </div>
 
-          <input
-            name="teamSize"
-            required
-            placeholder="Team Size (e.g. 2-4 Members)"
-            className="border rounded-xl px-4 py-4"
-          />
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Team Size</label>
+            <input
+              name="teamSize"
+              required
+              placeholder="e.g. Solo or 2-4 Members"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            />
+          </div>
 
-          <select
-            name="status"
-            required
-            className="border rounded-xl px-4 py-4"
-          >
-            <option>Upcoming</option>
-            <option>Ongoing</option>
-            <option>Completed</option>
-            <option>Closed</option>
-          </select>
+          <div className="flex flex-col">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Status</label>
+            <select
+              name="status"
+              required
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            >
+              <option>Upcoming</option>
+              <option>Ongoing</option>
+              <option>Completed</option>
+              <option>Closed</option>
+            </select>
+          </div>
 
-          <textarea
-            name="description"
-            required
-            rows={5}
-            placeholder="Event Description"
-            className="md:col-span-2 border rounded-xl px-4 py-4"
-          />
+          <div className="flex flex-col md:col-span-2">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Event Description</label>
+            <textarea
+              name="description"
+              required
+              rows={5}
+              placeholder="Describe the event rules, timeline, details..."
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm text-sm font-medium"
+            />
+          </div>
 
-          <label className="md:col-span-2 flex items-center gap-3 font-semibold">
+          <label className="md:col-span-2 flex items-center gap-3 font-semibold text-slate-700 text-sm cursor-pointer select-none">
             <input
               type="checkbox"
               name="certificateAvailable"
+              className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
             />
-            Certificate Available
+            Certificate Available for Participants
           </label>
 
           <button
             type="submit"
             disabled={loading}
-            className="md:col-span-2 bg-blue-700 hover:bg-blue-800 text-white py-4 rounded-xl text-lg font-semibold"
+            className="md:col-span-2 bg-blue-700 hover:bg-blue-800 text-white py-3.5 rounded-xl text-md font-semibold transition cursor-pointer"
           >
             {loading ? "Creating..." : "Create Event"}
           </button>

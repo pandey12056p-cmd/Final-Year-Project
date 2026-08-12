@@ -3,7 +3,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --landing-bg: #f8faff;
+  --landing-text: #0d1838;
+  --landing-title: #0b1738;
+  --landing-muted: #667089;
+  --hero-a: #dfe9ff;
+  --hero-b: #f8faff;
+  --hero-c: #e3dcff;
+  --shape-line: rgba(255,255,255,.82);
+  --card-bg: rgba(255,255,255,.93);
+  --category-bg: rgba(255,255,255,.76);
+  --card-border: #e6e9f2;
+  --divider: #e0e4ee;
+  --button-glass: rgba(255,255,255,.66);
 }
+
+html[data-theme="dark"] { --background:#080f20;--foreground:#edf2ff;--landing-bg:#080f20;--landing-text:#edf2ff;--landing-title:#f6f8ff;--landing-muted:#aab5cf;--hero-a:#0b1b3b;--hero-b:#10172b;--hero-c:#221b4a;--shape-line:rgba(139,158,213,.2);--card-bg:rgba(17,26,48,.94);--category-bg:rgba(18,28,51,.84);--card-border:#283551;--divider:#2d3851;--button-glass:rgba(14,23,44,.7);color-scheme:dark }
 
 @theme inline {
   --color-background: var(--background);
@@ -12,15 +27,35 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-size: 14.5px;
+}
+
+/* Custom Thin Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
+.site-nav{position:sticky;top:0;z-index:50;height:64px;background:linear-gradient(100deg,#071b42,#06132e);color:#fff;box-shadow:0 4px 15px rgba(5,17,44,.2)}
+.nav-inner{max-width:1480px;height:100%;margin:auto;padding:0 30px;display:flex;align-items:center;gap:28px}.nav-brand{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:750;white-space:nowrap}.nav-brand svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}.nav-links{display:flex;align-self:stretch;align-items:center;gap:32px;margin-left:auto}.nav-links a{position:relative;font-size:14px;font-weight:560;color:#f7f9ff}.nav-links a:hover{color:#9eb7ff}.nav-links a:first-child:after{content:"";position:absolute;height:3px;left:0;right:0;bottom:-21px;border-radius:4px;background:#4268ff}.nav-actions{display:flex;align-items:center;gap:10px;margin-left:10px}.theme-toggle{display:grid;place-items:center;width:39px;height:39px;border:1px solid #496086;border-radius:9px;cursor:pointer;color:#fff;background:rgba(255,255,255,.04)}.theme-toggle:hover{background:rgba(255,255,255,.12)}.theme-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.login-link,.register-link,.logout-button{padding:9px 18px;border-radius:8px;font-size:14px;font-weight:600}.login-link{border:1px solid #52678d}.register-link,.logout-button{color:#fff;background:linear-gradient(110deg,#4073ff,#653cf2);border:0}.logout-button{cursor:pointer}
+@media(max-width:1050px){.nav-links{display:none}.nav-actions{margin-left:auto}}@media(max-width:560px){.site-nav{height:58px}.nav-inner{padding:0 14px;gap:10px}.nav-brand{font-size:16px}.nav-brand svg{width:24px}.register-link{display:none}.login-link{padding:8px 11px}.theme-toggle{width:36px;height:36px}}

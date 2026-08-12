@@ -128,11 +128,11 @@ export default async function ReportsPage() {
 
       <div>
 
-        <h1 className="text-5xl font-bold text-blue-700">
+        <h1 className="text-xl font-bold text-slate-800">
           Reports Dashboard
         </h1>
 
-        <p className="text-gray-500 mt-2">
+        <p className="text-xs text-slate-400 mt-1">
           Complete analytics of Event Aggregator
         </p>
 
@@ -169,7 +169,14 @@ export default async function ReportsPage() {
 
       {/* Export */}
 
-      <ExportButtons />
+      <ExportButtons
+        monthlyData={monthlyData}
+        categories={categories}
+        events={eventReport}
+        totalUsers={totalUsers}
+        totalEvents={totalEvents}
+        totalRegistrations={totalRegistrations}
+      />
 
     </main>
   );

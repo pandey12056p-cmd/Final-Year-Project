@@ -39,24 +39,24 @@ export default function SummaryCards({
   ];
 
   return (
-    <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
+    <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-4">
       {cards.map((card) => (
         <div
           key={card.title}
-          className={`bg-gradient-to-r ${card.color} rounded-3xl shadow-xl p-8 text-white`}
+          className={`bg-gradient-to-r ${card.color} rounded-2xl shadow-md p-5 text-white`}
         >
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-lg opacity-90">
+              <p className="text-xs font-semibold opacity-90 uppercase tracking-wider">
                 {card.title}
               </p>
 
-              <h2 className="text-5xl font-bold mt-3">
+              <h2 className="text-2xl font-extrabold mt-2">
                 {card.value}
               </h2>
             </div>
 
-            <div className="text-6xl">
+            <div className="text-3xl">
               {card.icon}
             </div>
           </div>

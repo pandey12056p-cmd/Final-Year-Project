@@ -53,10 +53,10 @@ export default function IssueCertificateButton({
     <button
       onClick={issueCertificate}
       disabled={loading}
-      className={`px-5 py-2 rounded-lg font-semibold text-white transition-all duration-200 ${
+      className={`px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all duration-200 ${
         loading
-          ? "bg-gray-400 cursor-not-allowed"
-          : "bg-blue-700 hover:bg-blue-800"
+          ? "bg-slate-100 text-slate-400 cursor-not-allowed"
+          : "bg-blue-50 hover:bg-blue-100 text-blue-600 hover:text-blue-700"
       }`}
     >
       {loading ? "Issuing..." : "🎓 Issue Certificate"}
