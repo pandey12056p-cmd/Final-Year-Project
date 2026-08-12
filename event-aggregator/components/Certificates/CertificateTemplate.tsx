@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import CertificateQR from "./CertificateQR";
 
 type Props = {
@@ -13,6 +16,13 @@ export default function CertificateTemplate({
   certificateId,
   issueDate,
 }: Props) {
+  const [origin, setOrigin] = useState("http://localhost:3000");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, []);
   return (
     <div className="flex justify-center py-10 bg-slate-100">
 
@@ -142,7 +152,7 @@ export default function CertificateTemplate({
             <div className="flex flex-col items-end">
 
               <CertificateQR
-                value={`http://localhost:3000/verify/${certificateId}`}
+                value={`${origin}/verify/${certificateId}`}
               />
 
               <p className="text-sm text-gray-500 mt-2">

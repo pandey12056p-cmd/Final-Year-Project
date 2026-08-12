@@ -38,53 +38,56 @@ export default function UsersPage() {
 
       </div>
 
-      <div className="bg-white shadow-lg rounded-xl mt-8 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 mt-8 overflow-x-auto">
 
         {loading ? (
-          <div className="p-10 text-center text-xl">
+          <div className="p-10 text-center text-xs text-slate-400 font-bold animate-pulse">
             Loading...
           </div>
         ) : (
 
-          <table className="w-full">
+          <table className="w-full text-left border-collapse">
 
-            <thead className="bg-blue-700 text-white">
+            <thead className="bg-slate-50/75 border-b border-slate-200">
 
               <tr>
-                <th className="p-4 text-left">ID</th>
-                <th className="p-4 text-left">Name</th>
-                <th className="p-4 text-left">Email</th>
-                <th className="p-4 text-left">Role</th>
-                <th className="p-4 text-left">Created</th>
+                <th className="px-5 py-3.5 text-[10px] uppercase tracking-widest text-slate-400 font-extrabold">ID</th>
+                <th className="px-5 py-3.5 text-[10px] uppercase tracking-widest text-slate-400 font-extrabold">Name</th>
+                <th className="px-5 py-3.5 text-[10px] uppercase tracking-widest text-slate-400 font-extrabold">Email</th>
+                <th className="px-5 py-3.5 text-[10px] uppercase tracking-widest text-slate-400 font-extrabold">Role</th>
+                <th className="px-5 py-3.5 text-[10px] uppercase tracking-widest text-slate-400 font-extrabold">Created</th>
               </tr>
 
             </thead>
 
-            <tbody>
+            <tbody className="divide-y divide-slate-100">
 
               {users.map((user) => (
 
                 <tr
                   key={user.id}
-                  className="border-b hover:bg-gray-50"
+                  className="hover:bg-slate-50/50 transition"
                 >
-                  <td className="p-4">{user.id}</td>
+                  <td className="px-5 py-3 text-xs font-bold text-slate-500">{user.id}</td>
 
-                  <td className="p-4 font-semibold">
-                    {user.name}
+                  <td className="px-5 py-3 text-xs font-bold text-slate-800 flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shadow-sm">
+                      {user.name.slice(0, 2).toUpperCase()}
+                    </div>
+                    <span>{user.name}</span>
                   </td>
 
-                  <td className="p-4">
+                  <td className="px-5 py-3 text-xs font-semibold text-slate-500">
                     {user.email}
                   </td>
 
-                  <td className="p-4">
+                  <td className="px-5 py-3 text-xs">
 
                     <span
-                      className={`px-3 py-1 rounded-full text-white text-sm ${
+                      className={`font-bold px-2 py-0.5 rounded text-[9px] uppercase tracking-wider border ${
                         user.role === "admin"
-                          ? "bg-red-600"
-                          : "bg-green-600"
+                          ? "bg-red-50 text-red-600 border-red-100"
+                          : "bg-green-50 text-green-600 border-green-100"
                       }`}
                     >
                       {user.role}
@@ -92,8 +95,12 @@ export default function UsersPage() {
 
                   </td>
 
-                  <td className="p-4">
-                    {new Date(user.createdAt).toLocaleDateString()}
+                  <td className="px-5 py-3 text-xs font-semibold text-slate-500">
+                    {new Date(user.createdAt).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
                   </td>
 
                 </tr>

@@ -1,3 +1,8 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+
 type TopEvent = {
   eventTitle: string;
   count: number;
@@ -8,103 +13,76 @@ type TopEventsProps = {
 };
 
 export default function TopEvents({ events }: TopEventsProps) {
-  const maxCount =
-    events.length > 0
-      ? Math.max(...events.map((e) => e.count))
-      : 1;
+  // Gradients for ranking thumbnails
+  const gradients = [
+    "from-blue-600 to-indigo-700",
+    "from-purple-600 to-pink-700",
+    "from-emerald-600 to-teal-700",
+    "from-orange-500 to-amber-600",
+  ];
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
-
+    <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm h-full flex flex-col justify-between">
+      
       {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-sm font-bold text-slate-800">
+            Top Events
+          </h2>
+          <p className="text-[11px] text-slate-400 font-semibold mt-0.5">
+            Most registered events
+          </p>
+        </div>
 
-      <div className="bg-gradient-to-r from-green-600 to-emerald-700 px-8 py-6">
-
-        <h2 className="text-3xl font-bold text-white">
-          Top Popular Events
-        </h2>
-
-        <p className="text-green-100 mt-2">
-          Most registered events
-        </p>
-
+        <Link
+          href="/admin/events"
+          className="border border-slate-200 hover:bg-slate-50 transition text-[10px] font-bold text-blue-600 rounded-lg px-2.5 py-1"
+        >
+          View All
+        </Link>
       </div>
 
-      <div className="p-6 space-y-6">
-
+      {/* List items */}
+      <div className="mt-4 flex-1 space-y-3">
         {events.length === 0 ? (
-          <div className="text-center py-10 text-gray-500">
-            No event registrations yet.
+          <div className="text-center py-10 text-xs text-slate-400">
+            No event data available.
           </div>
         ) : (
-          events.map((event, index) => {
-            const percentage =
-              (event.count / maxCount) * 100;
+          events.slice(0, 4).map((event, index) => (
+            <div key={event.eventTitle} className="flex items-center justify-between gap-3 text-xs">
+              
+              <div className="flex items-center gap-3">
+                {/* Index Rank */}
+                <span className="font-extrabold text-slate-400 w-3 text-center">
+                  {index + 1}
+                </span>
 
-            const medal =
-              index === 0
-                ? "🥇"
-                : index === 1
-                ? "🥈"
-                : index === 2
-                ? "🥉"
-                : "🏅";
-
-            return (
-              <div
-                key={event.eventTitle}
-                className="rounded-2xl border border-slate-200 p-5 hover:shadow-md transition"
-              >
-                <div className="flex justify-between items-center">
-
-                  <div className="flex items-center gap-4">
-
-                    <div className="text-3xl">
-                      {medal}
-                    </div>
-
-                    <div>
-
-                      <h3 className="font-bold text-lg text-slate-800">
-                        {event.eventTitle}
-                      </h3>
-
-                      <p className="text-gray-500 text-sm">
-                        Rank #{index + 1}
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                  <div className="bg-green-100 text-green-700 px-4 py-2 rounded-full font-bold">
-                    {event.count}
-                  </div>
-
+                {/* Thumbnail Icon */}
+                <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${gradients[index % gradients.length]} flex items-center justify-center text-white font-bold text-xs shadow-sm`}>
+                  {event.eventTitle.slice(0, 2).toUpperCase()}
                 </div>
 
-                {/* Progress */}
-
-                <div className="mt-4">
-
-                  <div className="h-3 bg-slate-200 rounded-full overflow-hidden">
-
-                    <div
-                      className="h-full bg-gradient-to-r from-green-500 to-emerald-600 rounded-full transition-all duration-700"
-                      style={{
-                        width: `${percentage}%`,
-                      }}
-                    />
-
-                  </div>
-
+                {/* Info */}
+                <div>
+                  <h4 className="font-bold text-slate-800 line-clamp-1">
+                    {event.eventTitle}
+                  </h4>
+                  <p className="text-[10px] text-slate-400 font-medium mt-0.5">
+                    {event.count} registrations
+                  </p>
                 </div>
-
               </div>
-            );
-          })
-        )}
 
+              {/* Status Pill */}
+              <span className="bg-emerald-50 text-emerald-600 font-bold px-2 py-0.5 rounded text-[9px] uppercase tracking-wider shadow-sm border border-emerald-100">
+                Active
+              </span>
+
+            </div>
+          ))
+        )}
       </div>
 
     </div>
