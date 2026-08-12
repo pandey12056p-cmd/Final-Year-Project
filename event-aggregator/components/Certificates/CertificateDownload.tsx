@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 
@@ -20,7 +20,7 @@ export default function CertificateDownload() {
 
       const dataUrl = await toPng(certificate, {
         cacheBust: true,
-        pixelRatio: 4,
+        pixelRatio: 3,
         backgroundColor: "#ffffff",
         quality: 1,
       });
@@ -44,19 +44,32 @@ export default function CertificateDownload() {
 
       pdf.save("Certificate.pdf");
     } catch (error) {
-      console.error(error);
+      console.error("PDF download error:", error);
       alert("Failed to download certificate.");
     } finally {
       setLoading(false);
     }
   }
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.get("autoDownload") === "true") {
+        // Wait briefly for DOM and QR code to render before triggering download
+        const timer = setTimeout(() => {
+          handleDownload();
+        }, 600);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, []);
+
   return (
     <div className="flex justify-center my-8">
       <button
         onClick={handleDownload}
         disabled={loading}
-        className={`px-8 py-4 rounded-xl font-semibold text-white transition ${
+        className={`px-8 py-4 rounded-xl font-semibold text-white shadow-lg transition ${
           loading
             ? "bg-gray-500 cursor-not-allowed"
             : "bg-blue-700 hover:bg-blue-800"

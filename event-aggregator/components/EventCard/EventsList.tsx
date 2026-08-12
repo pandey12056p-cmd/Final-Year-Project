@@ -2,18 +2,8 @@
 
 import { useMemo, useState } from "react";
 import EventCard from "./EventCard";
-
-type Event = {
-  id: number;
-  title: string;
-  image: string;
-  date: string;
-  location: string;
-  description: string;
-  category: string;
-  mode: string;
-  status: string;
-};
+import { Event } from "@/types/event";
+import { formatDate } from "@/lib/date";
 
 export default function EventsList({
   events,
@@ -99,9 +89,11 @@ export default function EventsList({
 
       <div className="max-w-7xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredEvents.length === 0 ? (
-          <h2 className="text-2xl font-bold">
-            No Events Found
-          </h2>
+          <div className="col-span-full text-center py-16 bg-white rounded-3xl shadow p-8">
+            <div className="text-6xl mb-4">🔍</div>
+            <h2 className="text-2xl font-bold text-slate-700">No Events Found</h2>
+            <p className="text-gray-500 mt-2">Try adjusting your search filters.</p>
+          </div>
         ) : (
           filteredEvents.map((event) => (
             <EventCard
@@ -109,7 +101,7 @@ export default function EventsList({
               id={event.id}
               title={event.title}
               image={event.image}
-              date={new Date(event.date).toLocaleDateString("en-IN")}
+              date={formatDate(event.date)}
               location={event.location}
               description={event.description}
             />

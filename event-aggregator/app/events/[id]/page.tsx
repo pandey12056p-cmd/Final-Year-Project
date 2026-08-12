@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import RegistrationForm from "@/components/RegistrationForm/RegistrationForm";
+import { formatDate } from "@/lib/date";
 
 type Props = {
   params: Promise<{
@@ -21,6 +22,15 @@ export default async function EventDetails({ params }: Props) {
   if (!event) {
     notFound();
   }
+
+  const registrationsCount = await prisma.registration.count({
+    where: {
+      eventId: event.id,
+    },
+  });
+
+  const isExpired = new Date() > new Date(event.registrationDeadline);
+  const isFull = registrationsCount >= event.maxParticipants;
 
   return (
     <main className="min-h-screen bg-slate-100 py-10 px-6">
@@ -60,12 +70,7 @@ export default async function EventDetails({ params }: Props) {
 
               <div className="space-y-4 text-gray-700">
                 <p>
-                  📅 <strong>Date :</strong>{" "}
-                  {new Date(event.date).toLocaleDateString("en-IN", {
-                    day: "2-digit",
-                    month: "long",
-                    year: "numeric",
-                  })}
+                  📅 <strong>Date :</strong> {formatDate(event.date)}
                 </p>
 
                 <p>
@@ -86,7 +91,7 @@ export default async function EventDetails({ params }: Props) {
               </div>
             </div>
 
-            {/* Registration Information */}
+            {/* Registration Details */}
 
             <div className="bg-green-50 rounded-2xl p-6 shadow">
               <h3 className="text-xl font-bold text-green-700 mb-5">
@@ -100,19 +105,12 @@ export default async function EventDetails({ params }: Props) {
 
                 <p>
                   👨‍🎓 <strong>Max Participants :</strong>{" "}
-                  {event.maxParticipants}
+                  {event.maxParticipants} ({registrationsCount} Registered)
                 </p>
 
                 <p>
                   ⏳ <strong>Registration Deadline :</strong>{" "}
-                  {new Date(event.registrationDeadline).toLocaleDateString(
-                    "en-IN",
-                    {
-                      day: "2-digit",
-                      month: "long",
-                      year: "numeric",
-                    }
-                  )}
+                  {formatDate(event.registrationDeadline)}
                 </p>
 
                 <p>
@@ -126,14 +124,20 @@ export default async function EventDetails({ params }: Props) {
                   🚦 <strong>Status :</strong>{" "}
                   <span
                     className={`font-semibold ${
-                      event.status === "Upcoming"
+                      isExpired || isFull
+                        ? "text-red-600"
+                        : event.status === "Upcoming"
                         ? "text-green-600"
                         : event.status === "Completed"
                         ? "text-blue-600"
                         : "text-red-600"
                     }`}
                   >
-                    {event.status}
+                    {isExpired
+                      ? "Registration Closed"
+                      : isFull
+                      ? "Registration Full"
+                      : event.status}
                   </span>
                 </p>
               </div>
@@ -148,6 +152,8 @@ export default async function EventDetails({ params }: Props) {
         <RegistrationForm
           eventId={event.id}
           eventTitle={event.title}
+          isExpired={isExpired}
+          isFull={isFull}
         />
       </div>
     </main>

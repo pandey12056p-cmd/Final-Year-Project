@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import DeleteRegistrationButton from "./DeleteRegistrationButton";
+import { formatDate } from "@/lib/date";
 
 type Registration = {
   id: number;
@@ -11,7 +12,7 @@ type Registration = {
   college: string;
   eventTitle: string;
   year: string;
-  createdAt: Date;
+  createdAt: Date | string;
 };
 
 export default function RegistrationSearchTable({
@@ -82,7 +83,7 @@ export default function RegistrationSearchTable({
                 <td className="p-4">{reg.year}</td>
 
                 <td className="p-4">
-                  {new Date(reg.createdAt).toLocaleDateString()}
+                  {formatDate(reg.createdAt)}
                 </td>
 
                 <td className="p-4 text-center">

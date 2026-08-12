@@ -25,7 +25,7 @@ export default async function AdminCertificatesPage() {
 
         <Link
           href="/admin"
-          className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-xl font-semibold"
+          className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-xl font-semibold transition"
         >
           ← Dashboard
         </Link>
@@ -33,94 +33,89 @@ export default async function AdminCertificatesPage() {
 
       {/* Table */}
       <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-blue-700 text-white">
-            <tr>
-              <th className="p-4 text-left">Student</th>
-              <th className="p-4 text-left">Event</th>
-              <th className="p-4 text-left">Email</th>
-              <th className="p-4 text-center">Status</th>
-              <th className="p-4 text-center">Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {registrations.length === 0 ? (
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-blue-700 text-white">
               <tr>
-                <td
-                  colSpan={5}
-                  className="text-center py-10 text-gray-500"
-                >
-                  No registrations found.
-                </td>
+                <th className="p-4 text-left">Student</th>
+                <th className="p-4 text-left">Event</th>
+                <th className="p-4 text-left">Email</th>
+                <th className="p-4 text-center">Status</th>
+                <th className="p-4 text-center">Action</th>
               </tr>
-            ) : (
-              registrations.map((registration) => (
-                <tr
-                  key={registration.id}
-                  className="border-b hover:bg-slate-50"
-                >
-                  <td className="p-4 font-semibold">
-                    {registration.fullName}
-                  </td>
+            </thead>
 
-                  <td className="p-4">
-                    {registration.eventTitle}
-                  </td>
-
-                  <td className="p-4">
-                    {registration.email}
-                  </td>
-
-                  <td className="p-4 text-center">
-                    {registration.certificateIssued ? (
-                      <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
-                        Issued
-                      </span>
-                    ) : (
-                      <span className="bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold">
-                        Pending
-                      </span>
-                    )}
-                  </td>
-
-                  <td className="p-4 text-center">
-                    {registration.certificateIssued ? (
-                      <div className="flex justify-center gap-2">
-                        <Link
-                          href={`/certificate/${registration.id}`}
-                          target="_blank"
-                          className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg"
-                        >
-                          👁 View
-                        </Link>
-
-                        <Link
-                          href={`/certificate/${registration.id}`}
-                          target="_blank"
-                          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
-                        >
-                          📄 Download
-                        </Link>
-
-                        <button
-                          disabled
-                          className="bg-gray-300 text-gray-600 px-4 py-2 rounded-lg"
-                        >
-                          Issued
-                        </button>
-                      </div>
-                    ) : (
-                      <IssueCertificateButton
-                        registrationId={registration.id}
-                      />
-                    )}
+            <tbody>
+              {registrations.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={5}
+                    className="text-center py-10 text-gray-500"
+                  >
+                    No registrations found.
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                registrations.map((registration) => (
+                  <tr
+                    key={registration.id}
+                    className="border-b hover:bg-slate-50"
+                  >
+                    <td className="p-4 font-semibold">
+                      {registration.fullName}
+                    </td>
+
+                    <td className="p-4">
+                      {registration.eventTitle}
+                    </td>
+
+                    <td className="p-4">
+                      {registration.email}
+                    </td>
+
+                    <td className="p-4 text-center">
+                      {registration.certificateIssued ? (
+                        <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                          Issued
+                        </span>
+                      ) : (
+                        <span className="bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold">
+                          Pending
+                        </span>
+                      )}
+                    </td>
+
+                    <td className="p-4 text-center">
+                      {registration.certificateIssued ? (
+                        <div className="flex justify-center gap-2">
+                          <Link
+                            href={`/certificate/${registration.id}`}
+                            target="_blank"
+                            className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg"
+                          >
+                            👁 View
+                          </Link>
+
+                          <Link
+                            href={`/certificate/${registration.id}?autoDownload=true`}
+                            target="_blank"
+                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                          >
+                            📄 Download
+                          </Link>
+                        </div>
+                      ) : (
+                        <IssueCertificateButton
+                          registrationId={registration.id}
+                        />
+                      )}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </main>
   );

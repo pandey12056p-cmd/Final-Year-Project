@@ -2,6 +2,7 @@
 
 import DeleteButton from "./DeleteButton";
 import { useRouter } from "next/navigation";
+import { formatDate } from "@/lib/date";
 
 type Registration = {
   id: number;
@@ -12,7 +13,7 @@ type Registration = {
   college: string;
   branch: string;
   year: string;
-  createdAt: Date;
+  createdAt: Date | string;
 
   certificateIssued: boolean;
   certificateId: string | null;
@@ -54,11 +55,9 @@ export default function RegistrationTable({
 
   return (
     <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
-
       {/* Header */}
 
       <div className="flex justify-between items-center px-8 py-6 border-b bg-gradient-to-r from-blue-700 to-indigo-700">
-
         <div>
           <h2 className="text-3xl font-bold text-white">
             Recent Registrations
@@ -72,19 +71,14 @@ export default function RegistrationTable({
         <div className="bg-white/20 text-white px-5 py-2 rounded-full font-semibold">
           {registrations.length} Records
         </div>
-
       </div>
 
       {/* Table */}
 
       <div className="overflow-x-auto">
-
         <table className="min-w-full">
-
           <thead className="bg-slate-100">
-
             <tr className="text-left">
-
               <th className="px-6 py-4 font-bold">#</th>
 
               <th className="px-6 py-4 font-bold">
@@ -118,43 +112,31 @@ export default function RegistrationTable({
               <th className="px-6 py-4 font-bold text-center">
                 Action
               </th>
-
             </tr>
-
           </thead>
 
           <tbody>
-
             {registrations.length === 0 ? (
-
               <tr>
-
                 <td
                   colSpan={9}
                   className="text-center py-12 text-gray-500"
                 >
                   No registrations found.
                 </td>
-
               </tr>
-
             ) : (
-
               registrations.map((registration, index) => (
-
                 <tr
                   key={registration.id}
                   className="border-b hover:bg-blue-50 transition"
                 >
-
                   <td className="px-6 py-5 font-semibold">
                     {index + 1}
                   </td>
 
                   <td className="px-6 py-5">
-
                     <div>
-
                       <p className="font-semibold text-slate-800">
                         {registration.fullName}
                       </p>
@@ -162,19 +144,15 @@ export default function RegistrationTable({
                       <p className="text-sm text-gray-500">
                         {registration.branch}
                       </p>
-
                     </div>
-
                   </td>
 
                   <td className="px-6 py-5">
-
                     <p>{registration.email}</p>
 
                     <p className="text-sm text-gray-500">
                       {registration.phone}
                     </p>
-
                   </td>
 
                   <td className="px-6 py-5">
@@ -182,11 +160,9 @@ export default function RegistrationTable({
                   </td>
 
                   <td className="px-6 py-5">
-
                     <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
                       {registration.eventTitle}
                     </span>
-
                   </td>
 
                   <td className="px-6 py-5">
@@ -194,23 +170,17 @@ export default function RegistrationTable({
                   </td>
 
                   <td className="px-6 py-5">
-                    {new Date(
-                      registration.createdAt
-                    ).toLocaleDateString()}
+                    {formatDate(registration.createdAt)}
                   </td>
 
                   {/* Certificate */}
 
                   <td className="px-6 py-5 text-center">
-
                     {registration.certificateIssued ? (
-
                       <span className="text-green-700 font-semibold">
                         ✅ Issued
                       </span>
-
                     ) : (
-
                       <button
                         onClick={() =>
                           issueCertificate(registration.id)
@@ -219,31 +189,20 @@ export default function RegistrationTable({
                       >
                         Issue
                       </button>
-
                     )}
-
                   </td>
 
                   {/* Delete */}
 
                   <td className="px-6 py-5 text-center">
-
                     <DeleteButton id={registration.id} />
-
                   </td>
-
                 </tr>
-
               ))
-
             )}
-
           </tbody>
-
         </table>
-
       </div>
-
     </div>
   );
 }

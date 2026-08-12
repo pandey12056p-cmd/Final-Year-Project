@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { formatDate } from "@/lib/date";
 
 type User = {
   id: number;
@@ -18,16 +19,20 @@ export default function UsersPage() {
     fetch("/api/users")
       .then((res) => res.json())
       .then((data) => {
-        setUsers(data);
+        if (Array.isArray(data)) {
+          setUsers(data);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
         setLoading(false);
       });
   }, []);
 
   return (
     <main className="min-h-screen bg-slate-100 p-8">
-
       <div className="flex justify-between items-center">
-
         <h1 className="text-5xl font-bold text-blue-700">
           Users Management
         </h1>
@@ -35,21 +40,16 @@ export default function UsersPage() {
         <div className="bg-blue-700 text-white px-6 py-3 rounded-xl font-bold">
           Total Users : {users.length}
         </div>
-
       </div>
 
       <div className="bg-white shadow-lg rounded-xl mt-8 overflow-hidden">
-
         {loading ? (
           <div className="p-10 text-center text-xl">
             Loading...
           </div>
         ) : (
-
           <table className="w-full">
-
             <thead className="bg-blue-700 text-white">
-
               <tr>
                 <th className="p-4 text-left">ID</th>
                 <th className="p-4 text-left">Name</th>
@@ -57,13 +57,10 @@ export default function UsersPage() {
                 <th className="p-4 text-left">Role</th>
                 <th className="p-4 text-left">Created</th>
               </tr>
-
             </thead>
 
             <tbody>
-
               {users.map((user) => (
-
                 <tr
                   key={user.id}
                   className="border-b hover:bg-gray-50"
@@ -79,7 +76,6 @@ export default function UsersPage() {
                   </td>
 
                   <td className="p-4">
-
                     <span
                       className={`px-3 py-1 rounded-full text-white text-sm ${
                         user.role === "admin"
@@ -89,25 +85,25 @@ export default function UsersPage() {
                     >
                       {user.role}
                     </span>
-
                   </td>
 
                   <td className="p-4">
-                    {new Date(user.createdAt).toLocaleDateString()}
+                    {formatDate(user.createdAt)}
                   </td>
-
                 </tr>
-
               ))}
 
+              {users.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="text-center py-10 text-gray-500">
+                    No users found.
+                  </td>
+                </tr>
+              )}
             </tbody>
-
           </table>
-
         )}
-
       </div>
-
     </main>
   );
 }

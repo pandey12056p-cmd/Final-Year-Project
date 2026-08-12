@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { NextResponse } from "next/server";
 
 type RouteParams = {
   params: Promise<{
@@ -19,9 +20,16 @@ export async function GET(
       },
     });
 
-    return Response.json(event);
+    if (!event) {
+      return NextResponse.json(
+        { message: "Event not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(event);
   } catch (error) {
-    return Response.json(
+    return NextResponse.json(
       { message: "Failed to fetch event", error },
       { status: 500 }
     );
@@ -36,27 +44,45 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
 
+    const updateData: any = {};
+
+    if (body.title !== undefined) updateData.title = body.title;
+    if (body.category !== undefined) updateData.category = body.category;
+    if (body.image !== undefined) updateData.image = body.image;
+    if (body.description !== undefined) updateData.description = body.description;
+    if (body.location !== undefined) updateData.location = body.location;
+    if (body.mode !== undefined) updateData.mode = body.mode;
+    if (body.organizer !== undefined) updateData.organizer = body.organizer;
+    if (body.prize !== undefined) updateData.prize = body.prize;
+    if (body.teamSize !== undefined) updateData.teamSize = body.teamSize;
+    if (body.status !== undefined) updateData.status = body.status;
+    if (body.maxParticipants !== undefined)
+      updateData.maxParticipants = Number(body.maxParticipants);
+    if (body.certificateAvailable !== undefined)
+      updateData.certificateAvailable = Boolean(body.certificateAvailable);
+
+    if (body.date) {
+      updateData.date = new Date(body.date);
+    }
+    if (body.registrationDeadline) {
+      updateData.registrationDeadline = new Date(body.registrationDeadline);
+    }
+
     const event = await prisma.event.update({
       where: {
         id: Number(id),
       },
-      data: {
-        title: body.title,
-        image: body.image,
-        date: body.date,
-        location: body.location,
-        description: body.description,
-        prize: body.prize,
-        teamSize: body.teamSize,
-      },
+      data: updateData,
     });
 
-    return Response.json({
+    return NextResponse.json({
+      success: true,
       message: "Event updated successfully",
       event,
     });
   } catch (error) {
-    return Response.json(
+    console.error("Update event error:", error);
+    return NextResponse.json(
       { message: "Failed to update event", error },
       { status: 500 }
     );
@@ -76,11 +102,12 @@ export async function DELETE(
       },
     });
 
-    return Response.json({
+    return NextResponse.json({
+      success: true,
       message: "Event deleted successfully",
     });
   } catch (error) {
-    return Response.json(
+    return NextResponse.json(
       { message: "Failed to delete event", error },
       { status: 500 }
     );

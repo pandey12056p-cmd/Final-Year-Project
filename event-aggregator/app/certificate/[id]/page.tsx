@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-
 import CertificateTemplate from "@/components/Certificates/CertificateTemplate";
 import CertificateDownload from "@/components/Certificates/CertificateDownload";
+import { formatDate } from "@/lib/date";
 
 type Props = {
   params: Promise<{
@@ -27,8 +27,8 @@ export default async function CertificatePage({
 
   if (!registration.certificateIssued) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-slate-100">
-        <div className="bg-white rounded-3xl shadow-xl p-10 text-center">
+      <main className="min-h-screen flex items-center justify-center bg-slate-100 p-6">
+        <div className="bg-white rounded-3xl shadow-xl p-10 text-center max-w-md w-full">
           <h1 className="text-4xl font-bold text-red-600">
             Certificate Not Issued
           </h1>
@@ -43,15 +43,14 @@ export default async function CertificatePage({
 
   const certificateId =
     registration.certificateId ??
-    `EA-${registration.id}-${new Date().getFullYear()}`;
+    `EA-${new Date().getFullYear()}-${registration.id.toString().padStart(6, "0")}`;
 
-  const issueDate = registration.certificateIssuedAt
-    ? registration.certificateIssuedAt.toLocaleDateString("en-IN")
-    : new Date().toLocaleDateString("en-IN");
+  const issueDate = formatDate(
+    registration.certificateIssuedAt || new Date()
+  );
 
   return (
     <main className="min-h-screen bg-slate-100 py-10">
-
       <CertificateTemplate
         fullName={registration.fullName}
         eventTitle={registration.eventTitle}
@@ -60,7 +59,6 @@ export default async function CertificatePage({
       />
 
       <CertificateDownload />
-
     </main>
   );
 }

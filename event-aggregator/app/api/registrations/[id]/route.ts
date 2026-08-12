@@ -1,14 +1,21 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+type RouteParams = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: RouteParams
 ) {
   try {
+    const { id } = await params;
     await prisma.registration.delete({
       where: {
-        id: Number(params.id),
+        id: Number(id),
       },
     });
 
@@ -25,4 +32,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-}
+}

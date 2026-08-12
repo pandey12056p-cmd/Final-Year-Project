@@ -6,6 +6,7 @@ import Link from "next/link";
 import ProfileHeader from "@/components/Student/ProfileHeader";
 import ProfileCard from "@/components/Student/ProfileCard";
 import ProfileStats from "@/components/Student/ProfileStats";
+import { formatDate } from "@/lib/date";
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -140,9 +141,7 @@ export default async function DashboardPage() {
 
                   <div className="mt-2 text-sm text-gray-500">
                     Registered on{" "}
-                    {new Date(
-                      registration.createdAt
-                    ).toLocaleDateString()}
+                    {formatDate(registration.createdAt)}
                   </div>
 
                   <div className="mt-3 grid sm:grid-cols-2 gap-2 text-sm">
