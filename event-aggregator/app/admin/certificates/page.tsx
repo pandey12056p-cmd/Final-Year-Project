@@ -22,7 +22,7 @@ export default async function AdminCertificatesPage(props: {
   });
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-slate-50 p-6 md:p-8">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
@@ -43,7 +43,7 @@ export default async function AdminCertificatesPage(props: {
 
         <Link
           href="/admin"
-          className="border border-slate-200 hover:bg-slate-50 bg-white transition text-xs font-bold text-slate-700 rounded-lg px-3 py-1.5 shadow-sm"
+          className="border border-slate-200 hover:bg-slate-50 bg-white transition text-xs font-bold text-slate-700 rounded-lg px-4 py-2 shadow-sm"
         >
           ← Dashboard
         </Link>
@@ -107,28 +107,24 @@ export default async function AdminCertificatesPage(props: {
                     )}
                   </td>
 
-                  <td className="px-5 py-3">
+                  <td className="px-5 py-3 text-center">
                     {registration.certificateIssued ? (
                       <div className="flex justify-center gap-2">
                         <Link
                           href={`/certificate/${registration.id}`}
                           target="_blank"
-                          className="bg-blue-50 hover:bg-blue-100 text-blue-600 hover:text-blue-700 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition"
+                          className="bg-blue-50 hover:bg-blue-100 text-blue-600 hover:text-blue-700 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition flex items-center gap-1"
                         >
-                          View
+                          👁 View
                         </Link>
 
                         <Link
-                          href={`/certificate/${registration.id}`}
+                          href={`/certificate/${registration.id}?autoDownload=true`}
                           target="_blank"
-                          className="bg-emerald-50 hover:bg-emerald-100 text-emerald-600 hover:text-emerald-700 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition"
+                          className="bg-emerald-50 hover:bg-emerald-100 text-emerald-600 hover:text-emerald-700 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition flex items-center gap-1"
                         >
-                          Download
+                          📄 Download
                         </Link>
-
-                        <span className="bg-slate-100 text-slate-400 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-not-allowed">
-                          Issued
-                        </span>
                       </div>
                     ) : (
                       <div className="flex justify-center">

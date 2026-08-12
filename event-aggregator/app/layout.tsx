@@ -1,22 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/Navbar/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Event Aggregator",
-  description: "College Event Aggregator Project",
+  title: "Event Aggregator | Student Portal",
+  description: "College Event Aggregator & AI Personal Recommendation Platform",
 };
 
 export default function RootLayout({
@@ -25,11 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
-    >
-      <body className="min-h-screen bg-gray-100">
+    <html lang="en" className={inter.variable}>
+      <body className="min-h-screen bg-slate-100 font-sans antialiased text-slate-800">
         <Navbar />
         {children}
       </body>

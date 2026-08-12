@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Sidebar from "@/components/Admin/Sidebar";
 import Navbar from "@/components/Admin/Navbar";
 
@@ -19,7 +19,9 @@ export default function AdminLayout({
 
         <div className="hidden lg:block">
 
-          <Sidebar />
+          <Suspense fallback={null}>
+            <Sidebar />
+          </Suspense>
 
         </div>
 
@@ -47,7 +49,9 @@ export default function AdminLayout({
                 </button>
               </div>
 
-              <Sidebar onClose={() => setIsMobileOpen(false)} />
+              <Suspense fallback={null}>
+                <Sidebar onClose={() => setIsMobileOpen(false)} />
+              </Suspense>
             </div>
           </div>
         )}

@@ -15,11 +15,25 @@ model User {
   password String
   role     String @default("student")
 
-  phone   String?
-  college String?
-  branch  String?
-  year    String?
-  profile String?
+  studentId String?
+  phone     String?
+  college   String?
+  branch    String?
+  year      String?
+  profile   String?
+
+  skills            String?
+  interests         String?
+  careerGoal        String?
+  preferredDomain   String?
+  experienceLevel   String?
+  preferredMode     String?
+  preferredLocation String?
+
+  githubUrl    String?
+  linkedinUrl  String?
+  portfolioUrl String?
+  bio          String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -65,13 +79,40 @@ model Registration {
   email    String
   phone    String
 
-  college String
-  branch  String
-  year    String
+  studentId String?
+  gender    String?
 
-  teamName String?
+  college        String
+  branch         String
+  year           String
+  semester       String?
+  specialization String?
+  cgpa           String?
+  technicalSkills String?
+
+  participationType String? @default("Individual")
+  teamName          String?
+  teamMembers       String?
 
   reason String
+
+  previousExperience String?
+  relevantSkills     String?
+  portfolioUrl       String?
+  githubUrl          String?
+  linkedinUrl        String?
+
+  emergencyContactName     String?
+  emergencyContactRelation String?
+  emergencyContactPhone    String?
+
+  dietaryPreference  String?
+  tshirtSize         String?
+  accessibilityNeeds String?
+
+  declarationAccepted Boolean @default(true)
+  rulesAccepted       Boolean @default(true)
+  certificateConsent  Boolean @default(true)
 
   certificateId String? @unique
 
@@ -80,4 +121,74 @@ model Registration {
   certificateIssuedAt DateTime?
 
   createdAt DateTime @default(now())
+}
+
+model SavedEvent {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  eventId   Int
+  createdAt DateTime @default(now())
+
+  @@unique([userId, eventId])
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  title     String
+  message   String
+  type      String   @default("info")
+  eventId   Int?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Achievement {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  code        String
+  title       String
+  icon        String
+  description String
+  unlockedAt  DateTime @default(now())
+
+  @@unique([userId, code])
+}
+
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  eventId   Int
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+
+  @@unique([userId, eventId])
+}
+
+model Activity {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  title     String
+  type      String
+  createdAt DateTime @default(now())
+}
+
+model SkillProgress {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  skillName String
+  status    String   @default("Learning") // Not Started | Learning | Completed
+  progress  Int      @default(50)
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, skillName])
+}
+
+model Reminder {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  eventId      Int
+  reminderDate DateTime
+  createdAt    DateTime @default(now())
 }

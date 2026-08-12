@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import CertificateVerify from "@/components/Certificates/CertificateVerify";
+import { formatDate } from "@/lib/date";
 
 type Props = {
   params: Promise<{
@@ -23,7 +24,6 @@ export default async function VerifyCertificatePage({
     return (
       <main className="min-h-screen flex items-center justify-center bg-[#0b0f19] p-6">
         <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl shadow-2xl p-10 text-center max-w-md w-full">
-
           <div className="text-6xl mb-5">❌</div>
 
           <h1 className="text-2xl font-bold text-red-500">
@@ -39,7 +39,6 @@ export default async function VerifyCertificatePage({
               Back to Home
             </Link>
           </div>
-
         </div>
       </main>
     );
@@ -49,7 +48,6 @@ export default async function VerifyCertificatePage({
     return (
       <main className="min-h-screen flex items-center justify-center bg-[#0b0f19] p-6">
         <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl shadow-2xl p-10 text-center max-w-md w-full">
-
           <div className="text-6xl mb-5">⚠️</div>
 
           <h1 className="text-2xl font-bold text-amber-500">
@@ -65,7 +63,6 @@ export default async function VerifyCertificatePage({
               Back to Home
             </Link>
           </div>
-
         </div>
       </main>
     );
@@ -77,11 +74,7 @@ export default async function VerifyCertificatePage({
         fullName={registration.fullName}
         eventTitle={registration.eventTitle}
         certificateId={registration.certificateId!}
-        issueDate={
-          registration.certificateIssuedAt
-            ? registration.certificateIssuedAt.toLocaleDateString("en-IN")
-            : "-"
-        }
+        issueDate={formatDate(registration.certificateIssuedAt)}
       />
     </main>
   );

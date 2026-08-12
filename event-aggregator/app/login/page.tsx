@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
@@ -21,6 +22,7 @@ export default function LoginPage() {
 
     setLoading(true);
     setMessage("");
+    setIsError(false);
 
     try {
       const response = await fetch("/api/auth/login", {
@@ -31,10 +33,11 @@ export default function LoginPage() {
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => ({ message: "Server error occurred" }));
 
       if (!response.ok) {
-        setMessage(result.message || "Login Failed");
+        setIsError(true);
+        setMessage(result.message || "Login Failed. Please check your credentials.");
         setLoading(false);
         return;
       }
@@ -42,17 +45,21 @@ export default function LoginPage() {
       // Save user
       localStorage.setItem("user", JSON.stringify(result.user));
 
-      setMessage("Login Successful...");
+      setIsError(false);
+      setMessage("Login Successful! Redirecting...");
 
       // Redirect
-      if (result.user.role === "admin") {
-        window.location.href = "/admin";
-      } else {
-        window.location.href = "/dashboard";
-      }
+      setTimeout(() => {
+        if (result.user.role === "admin") {
+          window.location.href = "/admin";
+        } else {
+          window.location.href = "/dashboard";
+        }
+      }, 500);
     } catch (error) {
       console.error(error);
-      setMessage("Something went wrong");
+      setIsError(true);
+      setMessage("Network or server connection error. Please try again.");
       setLoading(false);
     }
   }
@@ -80,7 +87,13 @@ export default function LoginPage() {
 
           {/* Message */}
           {message && (
-            <div className="mb-6 bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-xl text-sm text-center font-semibold">
+            <div
+              className={`mb-6 p-4 rounded-xl text-center text-sm font-semibold ${
+                isError
+                  ? "bg-red-100 text-red-700 border border-red-200"
+                  : "bg-green-100 text-green-700 border border-green-200"
+              }`}
+            >
               {message}
             </div>
           )}
