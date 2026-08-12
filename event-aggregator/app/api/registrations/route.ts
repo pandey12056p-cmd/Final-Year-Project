@@ -110,7 +110,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create Registration
+    // Create Registration with Complete University Fields
     const registration = await prisma.registration.create({
       data: {
         eventId: eventIdNum,
@@ -118,11 +118,40 @@ export async function POST(request: Request) {
         fullName: body.fullName,
         email: body.email,
         phone: body.phone,
+        studentId: body.studentId || null,
+        gender: body.gender || null,
+
         college: body.college,
         branch: body.branch,
         year: body.year,
+        semester: body.semester || null,
+        specialization: body.specialization || null,
+        cgpa: body.cgpa || null,
+        technicalSkills: body.technicalSkills || null,
+
+        participationType: body.participationType || "Individual",
         teamName: body.teamName || null,
+        teamMembers: body.teamMembers || null,
+
         reason: body.reason,
+
+        previousExperience: body.previousExperience || null,
+        relevantSkills: body.relevantSkills || null,
+        portfolioUrl: body.portfolioUrl || null,
+        githubUrl: body.githubUrl || null,
+        linkedinUrl: body.linkedinUrl || null,
+
+        emergencyContactName: body.emergencyContactName || null,
+        emergencyContactRelation: body.emergencyContactRelation || null,
+        emergencyContactPhone: body.emergencyContactPhone || null,
+
+        dietaryPreference: body.dietaryPreference || null,
+        tshirtSize: body.tshirtSize || null,
+        accessibilityNeeds: body.accessibilityNeeds || null,
+
+        declarationAccepted: Boolean(body.declarationAccepted ?? true),
+        rulesAccepted: Boolean(body.rulesAccepted ?? true),
+        certificateConsent: Boolean(body.certificateConsent ?? true),
       },
     });
 

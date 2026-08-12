@@ -61,7 +61,7 @@ export async function POST(req: Request) {
         email: user.email,
         role: user.role,
       },
-      process.env.JWT_SECRET!,
+      process.env.JWT_SECRET || "my_super_secret_key_2026",
       {
         expiresIn: "7d",
       }
@@ -85,18 +85,18 @@ export async function POST(req: Request) {
       value: token,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       path: "/",
       maxAge: 60 * 60 * 24 * 7, // 7 Days
     });
 
     return response;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error("Login Error:", error);
 
     return NextResponse.json(
       {
-        message: "Server Error",
+        message: error?.message || "Server Error",
       },
       {
         status: 500,
