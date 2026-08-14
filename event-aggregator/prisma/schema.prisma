@@ -37,6 +37,8 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  collegeProfile College?
+  reports   Report[]
 }
 
 model Event {
@@ -53,6 +55,7 @@ model Event {
   organizer String @default("Event Aggregator")
 
   date                 DateTime
+  endDate              DateTime?
   registrationDeadline DateTime
 
   maxParticipants Int @default(100)
@@ -64,8 +67,61 @@ model Event {
 
   certificateAvailable Boolean @default(false)
 
+  // New College Panel fields
+  collegeId                 Int?
+  college                   College?  @relation(fields: [collegeId], references: [id], onDelete: SetNull)
+  eligibleColleges          String?
+  eligibleCourses           String?
+  eligibleBranches          String?
+  eligibleYears             String?
+  externalStudentsAllowed   Boolean   @default(true)
+  isPaid                    Boolean   @default(false)
+  registrationFee           Float     @default(0)
+  requiredDocuments         String?
+  termsAndConditions        String?
+  contactDetails            String?
+  officialRegistrationLink  String?
+
+  // Audit fields
+  submittedAt   DateTime?
+  approvedAt    DateTime?
+  approvedBy    String?
+  reviewReason  String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  reports   Report[]
+}
+
+model College {
+  id                 Int      @id @default(autoincrement())
+  userId             Int      @unique
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name               String
+  code               String
+  officialEmail      String   @unique
+  website            String
+  address            String
+  contactDetails     String
+  authorizedPerson   String
+  logo               String?
+  verificationDoc    String?
+  status             String   @default("PENDING_VERIFICATION") // PENDING_VERIFICATION, VERIFIED, REJECTED, SUSPENDED
+  rejectReason       String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  events             Event[]
+}
+
+model Report {
+  id        Int      @id @default(autoincrement())
+  eventId   Int
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reason    String
+  comment   String?
+  createdAt DateTime @default(now())
 }
 
 model Registration {

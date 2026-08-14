@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import ProfileHeader from "@/components/Student/ProfileHeader";
 import ProfileStats from "@/components/Student/ProfileStats";
@@ -49,6 +50,13 @@ export default async function DashboardPage() {
     );
   }
 
+  if (user.role === "college") {
+    redirect("/college");
+  }
+  if (user.role === "admin") {
+    redirect("/admin");
+  }
+
   const registrations = await prisma.registration.findMany({
     where: { email: user.email },
     orderBy: { createdAt: "desc" },
@@ -58,7 +66,11 @@ export default async function DashboardPage() {
   const pendingCertificates = registrations.filter((r) => !r.certificateIssued);
 
   const upcomingEvents = await prisma.event.count({
-    where: { status: "Upcoming" },
+    where: {
+      status: {
+        in: ["APPROVED", "Upcoming", "Ongoing"]
+      }
+    },
   });
 
   const savedEventsCount = await prisma.savedEvent.count({

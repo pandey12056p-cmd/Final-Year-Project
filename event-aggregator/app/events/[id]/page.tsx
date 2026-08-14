@@ -8,6 +8,7 @@ import EventHeroActions from "@/components/EventCard/EventHeroActions";
 import EventAboutSection from "@/components/EventCard/EventAboutSection";
 import EventMatchChecker from "@/components/EventCard/EventMatchChecker";
 import EventFeedbackForm from "@/components/EventCard/EventFeedbackForm";
+import ReportEventModal from "@/components/EventCard/ReportEventModal";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -19,6 +20,7 @@ export default async function EventDetailsPage({ params }: Props) {
 
   const event = await prisma.event.findUnique({
     where: { id: eventId },
+    include: { college: true },
   });
 
   if (!event) {
@@ -94,6 +96,20 @@ export default async function EventDetailsPage({ params }: Props) {
                 {event.certificateAvailable && (
                   <span className="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-3 py-1 rounded-full border border-emerald-200">
                     📜 Verified Certificate Available
+                  </span>
+                )}
+
+                {/* Verified Event Badge */}
+                {(event.status === "APPROVED" || event.status === "Upcoming" || event.status === "Ongoing") && (
+                  <span className="bg-blue-50 text-blue-700 text-[10px] font-black px-3 py-1 rounded-full border border-blue-200">
+                    ✓ Verified Event
+                  </span>
+                )}
+
+                {/* Verified College Badge */}
+                {event.college?.status === "VERIFIED" && (
+                  <span className="bg-indigo-50 text-indigo-700 text-[10px] font-black px-3 py-1 rounded-full border border-indigo-200">
+                    ✓ Verified College
                   </span>
                 )}
               </div>
@@ -273,14 +289,17 @@ export default async function EventDetailsPage({ params }: Props) {
         </div>
 
         {/* 8. ORGANIZED BY SECTION */}
-        <div className="bg-white rounded-3xl p-6 shadow-md border border-slate-200/80 flex items-center gap-4">
-          <div className="h-12 w-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl font-bold">
-            🏢
+        <div className="bg-white rounded-3xl p-6 shadow-md border border-slate-200/80 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="h-12 w-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl font-bold">
+              🏢
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-slate-900">Organized By {event.organizer}</h3>
+              <p className="text-xs text-slate-500">Official Campus Event Partner • Verified Authority</p>
+            </div>
           </div>
-          <div>
-            <h3 className="text-base font-bold text-slate-900">Organized By {event.organizer}</h3>
-            <p className="text-xs text-slate-500">Official Campus Event Partner • Verified Authority</p>
-          </div>
+          <ReportEventModal eventId={event.id} />
         </div>
 
         {/* 9. EVENT FEEDBACK FORM (FOR COMPLETED EVENTS) */}

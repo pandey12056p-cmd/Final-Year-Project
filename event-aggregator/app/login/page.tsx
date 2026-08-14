@@ -52,6 +52,8 @@ export default function LoginPage() {
       setTimeout(() => {
         if (result.user.role === "admin") {
           window.location.href = "/admin";
+        } else if (result.user.role === "college") {
+          window.location.href = "/college";
         } else {
           window.location.href = "/dashboard";
         }

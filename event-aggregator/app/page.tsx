@@ -83,25 +83,33 @@ export default function Home() {
         </p>
 
         {/* Action Buttons */}
-        <div className="mt-6 flex justify-center items-center gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
           <Link
             href="/events"
-            className="flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 transition-all duration-200 px-6 py-2.5 rounded-xl text-white font-bold text-xs shadow-lg shadow-blue-500/15 active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl text-white font-bold text-xs shadow-lg shadow-blue-500/15 active:scale-95 cursor-pointer"
           >
-            <span>Explore Events</span>
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
+            Explore Events →
+          </Link>
+
+          <Link
+            href="/login"
+            className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 hover:text-slate-800 transition px-6 py-3 rounded-xl font-bold text-xs shadow-sm active:scale-95 cursor-pointer"
+          >
+            🎓 Student Portal Login
+          </Link>
+
+          <Link
+            href="/college/login"
+            className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-950 border border-slate-800 text-slate-205 hover:text-white transition px-6 py-3 rounded-xl font-bold text-xs shadow-md active:scale-95 cursor-pointer"
+          >
+            🏢 College Organizer Login
           </Link>
 
           <Link
             href="/register"
-            className="flex items-center justify-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 hover:text-slate-800 transition-all duration-200 px-6 py-2.5 rounded-xl font-bold text-xs shadow-sm active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-700 hover:text-indigo-800 transition px-6 py-3 rounded-xl font-bold text-xs active:scale-95 cursor-pointer"
           >
-            <span>Join Now</span>
-            <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-            </svg>
+            ➕ Register Account
           </Link>
         </div>
 

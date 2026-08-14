@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
+import { usePathname } from "next/navigation";
 import Sidebar from "@/components/Admin/Sidebar";
 import Navbar from "@/components/Admin/Navbar";
 
@@ -10,6 +11,11 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  if (pathname === "/admin/login") {
+    return <>{children}</>;
+  }
 
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col">
