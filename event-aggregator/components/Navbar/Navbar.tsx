@@ -90,7 +90,7 @@ export default function Navbar() {
                 href="/register" 
                 className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 shadow-md shadow-blue-500/10 cursor-pointer"
               >
-                Join Now
+                Register
               </Link>
             </>
           ) : (
@@ -101,6 +101,13 @@ export default function Navbar() {
                   className="border border-slate-700 hover:border-slate-500 text-slate-200 hover:text-white rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 cursor-pointer"
                 >
                   Admin Panel
+                </Link>
+              ) : user.role === "college" ? (
+                <Link 
+                  href="/college" 
+                  className="border border-slate-700 hover:border-slate-500 text-slate-200 hover:text-white rounded-lg px-4 py-1.5 text-xs font-bold transition-all duration-200 cursor-pointer"
+                >
+                  College Panel
                 </Link>
               ) : (
                 <Link 

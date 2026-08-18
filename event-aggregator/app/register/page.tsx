@@ -21,6 +21,7 @@ export default function RegisterPage() {
       name: formData.get("name"),
       email: formData.get("email"),
       password: formData.get("password"),
+      role: formData.get("role"),
     };
 
     setLoading(true);
@@ -93,6 +94,21 @@ export default function RegisterPage() {
                 placeholder="Enter your full name"
                 className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder:text-slate-400"
               />
+            </div>
+
+            {/* Register As Role */}
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+                Register As
+              </label>
+              <select
+                name="role"
+                required
+                className="w-full border border-slate-200 bg-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder:text-slate-400"
+              >
+                <option value="student">Student</option>
+                <option value="college">College / Organizer</option>
+              </select>
             </div>
 
             {/* Email */}

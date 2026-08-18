@@ -3,6 +3,11 @@ import EventsList from "@/components/EventCard/EventsList";
 
 export default async function EventsPage() {
   const events = await prisma.event.findMany({
+    where: {
+      status: {
+        in: ["APPROVED", "Upcoming", "Ongoing"]
+      }
+    },
     orderBy: {
       id: "desc",
     },
