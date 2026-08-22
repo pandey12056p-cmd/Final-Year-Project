@@ -117,7 +117,7 @@ export default function AdminCollegesPage() {
       case "REJECTED":
         return "bg-rose-50 text-rose-600 border-rose-150";
       case "SUSPENDED":
-        return "bg-slate-900 text-rose-400 border-rose-950";
+        return "bg-rose-50 text-rose-600 border-rose-150";
       default:
         return "bg-slate-50 text-slate-500 border-slate-200";
     }
@@ -145,7 +145,7 @@ export default function AdminCollegesPage() {
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap cursor-pointer transition ${
               activeTab === tab
-                ? "bg-white text-blue-700 shadow-sm border border-slate-205"
+                ? "bg-white text-blue-700 shadow-sm border border-slate-200"
                 : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
             }`}
           >
@@ -280,7 +280,7 @@ export default function AdminCollegesPage() {
                             setModalCollege(col);
                             setModalAction("SUSPEND");
                           }}
-                          className="bg-slate-900 hover:bg-slate-950 text-rose-450 border border-rose-900 px-2.5 py-1.5 rounded-lg font-bold text-[10px] cursor-pointer"
+                          className="bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 px-2.5 py-1.5 rounded-lg font-bold text-[10px] cursor-pointer transition"
                         >
                           Suspend
                         </button>

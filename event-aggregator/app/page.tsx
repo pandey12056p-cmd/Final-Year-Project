@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#fcfdff] relative overflow-hidden flex flex-col justify-between">
-      
+    <main className="min-h-screen bg-landing-bg text-landing-text relative overflow-hidden flex flex-col justify-between transition-colors duration-500">
+
       {/* ── Background Mesh Gradients & Shapes ── */}
       <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-purple-200/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-12 left-0 w-[450px] h-[450px] bg-blue-200/15 rounded-full blur-3xl pointer-events-none" />
@@ -29,7 +29,7 @@ export default function Home() {
           <line x1="12" y1="56" x2="16" y2="56" strokeWidth="1" />
           <line x1="12" y1="64" x2="16" y2="64" strokeWidth="1" />
           <line x1="12" y1="72" x2="16" y2="72" strokeWidth="1" />
-          
+
           <line x1="24" y1="48" x2="28" y2="48" strokeWidth="1" />
           <line x1="24" y1="56" x2="28" y2="56" strokeWidth="1" />
           <line x1="24" y1="64" x2="28" y2="64" strokeWidth="1" />
@@ -60,7 +60,7 @@ export default function Home() {
 
       {/* ── Main Hero Area ── */}
       <section className="max-w-6xl mx-auto px-6 pt-10 pb-8 text-center relative z-10 w-full">
-        
+
         {/* Rounded Purple Pill Badge */}
         <div className="inline-flex items-center gap-2 bg-purple-50 border border-purple-100 text-purple-700 text-[11px] font-bold px-4 py-1.5 rounded-full mb-6 tracking-wide shadow-sm">
           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -100,7 +100,7 @@ export default function Home() {
 
           <Link
             href="/college/login"
-            className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-950 border border-slate-800 text-slate-205 hover:text-white transition px-6 py-3 rounded-xl font-bold text-xs shadow-md active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 hover:text-emerald-800 transition px-6 py-3 rounded-xl font-bold text-xs shadow-sm active:scale-95 cursor-pointer"
           >
             🏢 College Organizer Login
           </Link>
@@ -115,7 +115,7 @@ export default function Home() {
 
         {/* ── Stats Card Section ── */}
         <div className="bg-white rounded-2xl border border-slate-200/80 shadow-md flex flex-col md:flex-row items-stretch divide-y md:divide-y-0 md:divide-x divide-slate-100 max-w-4xl mx-auto mt-8 relative z-10">
-          
+
           {/* Card 1 */}
           <div className="flex-1 flex items-center justify-center md:justify-start gap-3.5 p-4.5">
             <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
@@ -178,7 +178,7 @@ export default function Home() {
 
       {/* ── Categories Section ── */}
       <section id="categories" className="max-w-6xl w-full mx-auto px-6 pb-12 relative z-10 scroll-mt-20">
-        
+
         {/* Section Header */}
         <div className="text-center">
           <h2 className="text-xl font-extrabold text-slate-800">
@@ -195,7 +195,7 @@ export default function Home() {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4.5 mt-8">
-          
+
           {/* Tech */}
           <div className="bg-white rounded-2xl border border-slate-100 hover:border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 p-4.5 flex flex-col items-center text-center cursor-pointer hover:-translate-y-0.5 group">
             <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 transition-transform duration-300 group-hover:scale-105">
@@ -276,7 +276,7 @@ export default function Home() {
           <path d="M50,75 C43,70 33,65 25,62" strokeWidth="1" />
           <path d="M50,60 C40,55 30,50 20,45" strokeWidth="1" />
           <path d="M50,45 C42,40 32,35 25,32" strokeWidth="1" />
-          
+
           <path d="M50,75 C57,70 67,65 75,62" strokeWidth="1" />
           <path d="M50,60 C60,55 70,50 80,45" strokeWidth="1" />
           <path d="M50,45 C58,40 68,35 75,32" strokeWidth="1" />
