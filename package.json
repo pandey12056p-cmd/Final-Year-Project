@@ -1,11 +1,13 @@
 {
+  "name": "final-year-project",
+  "private": true,
+  "workspaces": [
+    "event-aggregator"
+  ],
   "scripts": {
     "dev": "npm run dev --prefix event-aggregator",
     "build": "npm run build --prefix event-aggregator",
     "start": "npm run start --prefix event-aggregator",
     "lint": "npm run lint --prefix event-aggregator"
-  },
-  "dependencies": {
-    "react-qr-code": "^2.2.0"
   }
 }
