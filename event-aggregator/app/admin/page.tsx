@@ -5,6 +5,8 @@ import CategoryPieChart from "@/components/Dashboard/CategoryPieChart";
 import RegistrationOverview from "@/components/Dashboard/RegistrationOverview";
 import TopEvents from "@/components/Dashboard/TopEvents";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminPage() {
   const todayDate = new Date();
 
