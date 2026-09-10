@@ -9,5 +9,8 @@
     "build": "npm run build --prefix event-aggregator",
     "start": "npm run start --prefix event-aggregator",
     "lint": "npm run lint --prefix event-aggregator"
+  },
+  "devDependencies": {
+    "vercel": "^59.15.1"
   }
 }
