@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import RegistrationSearchTable from "@/components/Dashboard/RegistrationSearchTable";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminRegistrationsPage() {
   const registrations = await prisma.registration.findMany({
     orderBy: {

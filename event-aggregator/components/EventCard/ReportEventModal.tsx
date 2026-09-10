@@ -58,7 +58,7 @@ export default function ReportEventModal({ eventId }: Props) {
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <form
             onSubmit={handleSubmit}
-            className="bg-white rounded-3xl border border-slate-205 w-full max-w-md p-6 shadow-2xl space-y-4 text-xs"
+            className="bg-white rounded-3xl border border-slate-200 w-full max-w-md p-6 shadow-2xl space-y-4 text-xs"
           >
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h2 className="text-sm font-black text-slate-800 flex items-center gap-1">

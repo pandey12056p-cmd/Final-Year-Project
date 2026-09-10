@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import DeleteButton from "@/components/Dashboard/DeleteButton";
 import { formatDate } from "@/lib/date";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminEventsPage() {
   const events = await prisma.event.findMany({
     orderBy: {

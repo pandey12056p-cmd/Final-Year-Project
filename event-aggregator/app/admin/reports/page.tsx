@@ -6,6 +6,8 @@ import EventReportTable from "@/components/Reports/EventReportTable";
 import MonthlyRegistrations from "@/components/Reports/MonthlyRegistrations";
 import ExportButtons from "@/components/Reports/ExportButtons";
 
+export const dynamic = "force-dynamic";
+
 export default async function ReportsPage() {
 
   const [users, events, registrations] = await Promise.all([
